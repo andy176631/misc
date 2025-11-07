@@ -8,6 +8,7 @@ This guide explains how to install Kubernetes on an Ubuntu 24.04 system and enab
 3. Create a temporary virtual disk (dd), format it as ext4 with project quota, and mount it on /var/lib/kubelet.
 4. Install kubeadm, kubelet, and kubectl
 5. Run kubeadm init with the LocalStorageCapacityIsolationFSQuotaMonitoring feature gate enabled.
+6. Install CNI
 
 
 ```bash
@@ -20,7 +21,6 @@ export OS="xUbuntu_24.04"
 export CRIO_VERSION="1.31"
 curl -fsSL https://download.opensuse.org/repositories/isv:/kubernetes:/addons:/cri-o:/stable:/v${CRIO_VERSION}/deb/Release.key |
   sudo gpg --dearmor -o /usr/share/keyrings/cri-o-archive-keyring.gpg
-
 echo "deb [signed-by=/usr/share/keyrings/cri-o-archive-keyring.gpg] \
 https://download.opensuse.org/repositories/isv:/kubernetes:/addons:/cri-o:/stable:/v${CRIO_VERSION}/deb/ /" \
   | sudo tee /etc/apt/sources.list.d/cri-o-${CRIO_VERSION}.list
@@ -28,7 +28,6 @@ sudo apt update
 sudo apt install -y cri-o
 sudo systemctl enable crio --now
 sudo systemctl status crio
-
 
 
 dd if=/dev/zero of=ext4-quota.img bs=1M count=100
@@ -47,11 +46,11 @@ sudo apt-mark hold kubelet kubeadm kubectl
 sudo systemctl enable --now kubelet
 
 
-
 echo 'KUBELET_EXTRA_ARGS="--feature-gates=LocalStorageCapacityIsolationFSQuotaMonitoring=true"' > /etc/default/kubelet
 kubeadm init  --pod-network-cidr=10.244.0.0/16
+
+
 curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
 helm repo add cilium https://helm.cilium.io/
 helm install cilium cilium/cilium --version 1.17.6   --namespace kube-system
-
 ```
