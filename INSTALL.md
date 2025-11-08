@@ -53,4 +53,5 @@ kubeadm init  --pod-network-cidr=10.244.0.0/16
 curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
 helm repo add cilium https://helm.cilium.io/
 helm install cilium cilium/cilium --version 1.17.6   --namespace kube-system
+kubectl taint nodes ubuntu24-test  node-role.kubernetes.io/control-plane:NoSchedule-
 ```
