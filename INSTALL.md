@@ -24,6 +24,9 @@ curl -fsSL https://download.opensuse.org/repositories/isv:/kubernetes:/addons:/c
 echo "deb [signed-by=/usr/share/keyrings/cri-o-archive-keyring.gpg] \
 https://download.opensuse.org/repositories/isv:/kubernetes:/addons:/cri-o:/stable:/v${CRIO_VERSION}/deb/ /" \
   | sudo tee /etc/apt/sources.list.d/cri-o-${CRIO_VERSION}.list
+
+# This is faster => deb [signed-by=/usr/share/keyrings/cri-o-archive-keyring.gpg] https://downloadcontent.opensuse.org/repositories/isv:/kubernetes:/addons:/cri-o:/stable:/v1.31/deb/ /
+
 sudo apt update
 sudo apt install -y cri-o
 sudo systemctl enable crio --now
