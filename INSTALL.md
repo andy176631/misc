@@ -49,6 +49,10 @@ sudo apt-mark hold kubelet kubeadm kubectl
 sudo systemctl enable --now kubelet
 
 
+# If k8s is 1.24
+# vi /var/lib/kubelet/kubeadm-flags.env
+# KUBELET_KUBEADM_ARGS="--container-runtime=remote --container-runtime-endpoint=unix:///var/run/crio/crio.sock --pod-infra-container-image=k8s.gcr.io/pause:3.7 --feature-gates=LocalStorageCapacityIsolationFSQuotaMonitoring=true"
+
 echo 'KUBELET_EXTRA_ARGS="--feature-gates=LocalStorageCapacityIsolationFSQuotaMonitoring=true"' > /etc/default/kubelet
 kubeadm init  --pod-network-cidr=10.244.0.0/16
 
