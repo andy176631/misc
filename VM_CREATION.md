@@ -3,7 +3,7 @@ This guide explains how to create an Ubuntu 24.04 virtual machine instance on a 
 
 ```bash
 mkdir ubuntu24-test
-cd buntu24-test
+cd ubuntu24-test
 wget https://cloud-images.ubuntu.com/noble/current/noble-server-cloudimg-amd64.img
 cat > user-data <<EOF
 #cloud-config
