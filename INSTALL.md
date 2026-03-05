@@ -13,7 +13,7 @@ This guide explains how to install Kubernetes on an Ubuntu 24.04 system and enab
 
 ```bash
 sudo apt update
-sudo apt install linux-generic-hwe-24.04
+sudo apt install linux-generic-hwe-24.04 -y
 reboot
 
 
