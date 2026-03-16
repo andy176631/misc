@@ -1,6 +1,6 @@
 ## Install Kubernetes and Configure Project Quota
 
-This guide explains how to install Kubernetes on an Ubuntu 24.04 system and enable project quota support for local ephemeral storage.
+This guide explains how to install Kubernetes on an Ubuntu dd24.04 system and enable project quota support for local ephemeral storage.
 
 ### Steps Overview
 1. Upgrade the kernel, as the VM’s Ubuntu kernel is incomplete.
